@@ -1,5 +1,7 @@
 <?php
-
+/*
+ *  Implements hook_menu().
+ */
 function week10demo_menu() {
   $items = array();
   $items['weather'] = array(
@@ -16,7 +18,9 @@ function week10demo_menu() {
   );
   return $items;
 }
-
+/*
+ *  returns the current users weather as a string taking the zipcode from their profile.
+ */
 function week10demo_weather() {
   global $user;
   $account = user_load($user->uid);
@@ -29,9 +33,14 @@ function week10demo_weather() {
   }
 }
 
-
+/*
+ * Takes a node object and returns the weather from the zipcode field on the node.  
+ */
 function week10demo_node_weather($node) {
   $zip = $node->field_zip[LANGUAGE_NONE][0]['value'];
+  if ($node->type != 'park') {
+    return t('This is not a park node');
+  }
   return t("The current at %title is %temp degrees", array(
       '%title' => $node->title,
       '%temp' => si635_helper_weather_temp($zip)
