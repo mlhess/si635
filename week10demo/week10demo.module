@@ -3,16 +3,16 @@
 function week10demo_menu() {
   $items = array();
   $items['weather'] = array(
-    'page callback'=>'week10demo_weather',
-    'title'=>'Current Temp',
-    'access callback'=> 'user_is_logged_in'
+    'page callback' => 'week10demo_weather',
+    'title' => 'Current Temp',
+    'access callback' => 'user_is_logged_in'
   );
   $items['node/%node/weather'] = array(
-    'page callback'=>'week10demo_node_weather',
+    'page callback' => 'week10demo_node_weather',
     'page arguments' => array(1),
-    'title'=>'Current Temp',
-    'type'=> MENU_LOCAL_TASK,
-    'access callback'=> 'user_is_logged_in'
+    'title' => 'Current Temp',
+    'type' => MENU_LOCAL_TASK,
+    'access callback' => 'user_is_logged_in'
   );
   return $items;
 }
@@ -22,16 +22,20 @@ function week10demo_weather() {
   $account = user_load($user->uid);
   if (isset($account->field_zip_code[LANGUAGE_NONE][0]['value'])) {
     $zip = $account->field_zip_code[LANGUAGE_NONE][0]['value'];
-    return t("The current temp is %temp degrees",array('%temp'=>si635_helper_weather_temp($zip)));
-  } else {
+    return t("The current temp is %temp degrees", array('%temp' => si635_helper_weather_temp($zip)));
+  }
+  else {
     return t("Please set a zip on your users profile page");
   }
 }
 
 
-
 function week10demo_node_weather($node) {
   $zip = $node->field_zip[LANGUAGE_NONE][0]['value'];
-  return t("The current at %title is %temp degrees",array('%title'=>$node->title,'%temp'=>si635_helper_weather_temp($zip)));
+  return t("The current at %title is %temp degrees", array(
+      '%title' => $node->title,
+      '%temp' => si635_helper_weather_temp($zip)
+    ));
 
-} 
+}
+
