@@ -1,2 +1,3 @@
 name=week10demo
+dependencies[] = week10demo_feature
 core=7.x
