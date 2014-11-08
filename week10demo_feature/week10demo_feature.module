@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the week10demo_feature feature.
+ */
+
+include_once 'week10demo_feature.features.inc';
